@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aaad485e83284b3aa6283b5e754e1c08" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_Main_Model.AspNetRole" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Main_Model.AspNetUserRole" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Main_Model.AspNetUser" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Main_Model.DealPoint" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Main_Model.Deal" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Main_Model.LOITemplatePoint" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Main_Model.LOITemplate" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="DB_Main_Model.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__Deals__AgentID__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__Deals__LandlordI__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__Deals__TenantID__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__Deals__UserID__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__LOITempla__UserI__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__DealPoint__Templ__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__Deals__TemplateI__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__LOITempla__Templ__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Main_Model.FK__DealPoint__Deal___14270015" />
+        <EntityTypeShape EntityType="DB_Main_Model.MLOITemplatePoint" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="DB_Main_Model.MLOITemplate" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="DB_Main_Model.FK__MLOITempl__UserI__29221CFB" />
+        <AssociationConnector Association="DB_Main_Model.FK__MLOITempl__Templ__2BFE89A6" />
+        <AssociationConnector Association="DB_Main_Model.FK__MLOITempl__Templ__2CF2ADDF" />
+        <EntityTypeShape EntityType="DB_Main_Model.DealMessage" Width="1.5" PointX="3" PointY="8.75" />
+        <AssociationConnector Association="DB_Main_Model.FK__DealMessa__Recei__3D2915A8" />
+        <AssociationConnector Association="DB_Main_Model.FK__DealMessa__Sende__3C34F16F" />
+        <AssociationConnector Association="DB_Main_Model.FK__DealMessa__DealI__40058253" />
+        <EntityTypeShape EntityType="DB_Main_Model.DealHistory" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

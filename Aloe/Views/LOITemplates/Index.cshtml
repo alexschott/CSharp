@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Aloe.DB_Context.MLOITemplate>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+
+    <div class="container tabs_col_wrapper">
+        <div class="register_heading">
+
+            <h1>LOI TEMPLATE LIST</h1>
+        </div>
+        <div style="color:#29a329;"><b>@TempData["Save"] </b></div>
+        @if (@ViewBag.UserRole == 1 || @ViewBag.UserRole == 4) { }
+        else
+        {
+            <div><a id="AddDP" class="btn btn-info" href="~/loiTemplates/TemplatePoints" style="background:#129fdd; margin-bottom:10px; margin-top:20px;font-weight:bold;">CREATE NEW TEMPLATE</a></div>
+        }
+        <div class="table-responsive loi_content_main">
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="loi_content">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="width:90%">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td style="width:5%">
+                                            @if (@ViewBag.UserRole == 2 || @ViewBag.UserRole == 3)
+                                            {
+                                                @Html.ActionLink("Edit", "TemplatePoints", new { TempID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) }, new { @class = "edit" })
+                                            }
+                                            else
+                                            {
+                                            <!--    @Html.ActionLink("Edit", "TemplatePoints", null, new { @class = "edit disabled", @style = "pointer-events:none" }) -->
+                                            }
+                                        </td>
+                                        <td style="width:5%">
+                                            @if ((@ViewBag.UserRole == 2 || @ViewBag.UserRole == 3))
+                                            {
+                                                if (item.Status == 0)
+                                                {
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete", onclick = "return confirm('Are you sure you wish to delete this Template?');" })
+                                                }
+                                                else
+                                                {@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete disabled", @style = "pointer-events:none" }) }
+                                            }
+                                            else
+                                            {
+                                             <!--   @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete disabled", @style = "pointer-events:none" }) -->
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    a.edit {
+        background: url(../images/edit_ico.png) no-repeat top left;
+        display: block;
+        text-indent: -9999px; /* hides the link text */
+    }
+
+    a.delete {
+        background: url(../images/del_ico.png) no-repeat top left;
+        display: block;
+        text-indent: -9999px; /* hides the link text */
+    }
+</style>
+
+

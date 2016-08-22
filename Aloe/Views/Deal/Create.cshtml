@@ -1,0 +1,250 @@
+﻿@model Aloe.Models.DealM
+@{
+    Layout = "~/Views/Deal/_DealLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{  @Html.AntiForgeryToken()
+
+
+    <div class="bread_crumb">
+        <ul>
+            <li>
+                <img src="~/images/check_ico1.jpg">
+                <div>STARTED</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/dote_ico.jpg">
+                <div>INITIAL TERMS</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/dote_ico.jpg">
+                <div>CLIENT REVIEW</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/dote_ico.jpg">
+                <div>AMENDMENTS</div>
+            </li>
+            <li>
+                <img src="~/images/dote_ico2.jpg">
+                <div>FINISH</div>
+            </li>
+        </ul>
+    </div>
+     <!-- content --><div style="color:#29a329;"><b>@TempData["Msg"]</b>  </div>
+                    <div class="container deal_center">
+                        <div class="register_heading">
+                            <h1>CREATE DEAL</h1>
+                        </div>
+                        <div class="row">
+                           
+                            
+                            <div class="">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.Property, "Property", new { @class = "label_mar" })
+                                @Html.ValidationMessageFor(model => model.Property, "", new { @class = "text-danger", @id = "VProperty" })
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i style="color:#c8d3dc; font-size:21px" class="fa fa-home"></i></span>
+                                    @Html.TextBoxFor(m => m.Property, htmlAttributes: new { @class = "form-control input-lg" })
+                                </div>
+
+                                @Html.LabelFor(model => model.CreatedDate, "Start Date", new { @class = "label_mar" })
+                                 <div class="form-group input-group">
+                                    <label for="date-picker-1" class="input-group-addon btn">
+                                        <i style="color:#c8d3dc; font-size:16px" class="fa fa-calendar"></i>
+                                    </label>
+                                    @*@Html.TextBoxFor(m => m.CreatedDate, new { @PlaceHolder = "Select Date", @onfocus = "return false" })*@
+                                    <input id="DPicker" name="DPicker" type="hidden" />
+                                    <input id="CreatedDate" class="form-control text-box single-line" type="text" readonly="readonly">
+                                </div>
+                                
+                                @*@if (@ViewBag.CurrentUserRoleID==(int)Aloe.Helper.UserRole.Admin){
+                                @Html.LabelFor(model => model.AgentID, "Tenant Agent", new { @class = "label_mar" })
+                                }
+                                else if (@ViewBag.CurrentUserRoleID == (int)Aloe.Helper.UserRole.User)
+                                {
+                                @Html.LabelFor(model => model.AgentID, "Listing Agent", new { @class = "label_mar" })
+                                }*@
+
+                                @Html.LabelFor(model => model.AgentID, "Agent", new { @class = "label_mar" })
+                                
+                                @Html.ValidationMessageFor(model => model.AgentID, "", new { @class = "text-danger", @id = "VAgent" })
+                                @Html.DropDownList("AgentID", null,"Please Select",  htmlAttributes: new { @class = "choice form-group form-control input-lg" })
+                                
+                                
+                                @Html.LabelFor(model => model.TenantID, "Tenant", new { @class = "label_mar" })
+                                @Html.ValidationMessageFor(model => model.TenantID, "", new { @class = "text-danger", @id = "VTenant" })
+                                @Html.DropDownList("TenantID", null, "Please Select", htmlAttributes: new { @class = "choice form-group form-control input-lg" })
+                                
+                                
+                                @Html.LabelFor(model => model.LandlordID, "Landlord", new {@class="label_mar" })
+                                @Html.ValidationMessageFor(model => model.LandlordID, "", new { @class = "text-danger", @id = "VLandlord" })
+                                @Html.DropDownList("LandlordID", null, "Please Select", htmlAttributes: new { @class = "choice form-group form-control input-lg" })
+                                
+
+                                @Html.LabelFor(model => model.TemplateID, "LOI Template", new { @class = "label_mar" })
+                                @Html.ValidationMessageFor(model => model.TemplateID, "", new { @class = "text-danger", @id = "VTemplate" })
+                                <div class="relative_btn_div">
+                                    @Html.DropDownList("TemplateID", null, "Please Select", htmlAttributes: new { @class = "choice form-group form-control input-lg" })
+                                    <div class="absolute_btn_div">
+                                        <a id="TempViewID" href="#" onclick="RouteTemplate();" class="view_btn dis">View</a>
+                                        <a href="/loiTemplates/TemplatePoints" class="create_btn">Create</a>
+                                    </div>
+                                </div>
+
+                                @* *********** Deal Points ********************************* *@
+                                @*<span id="QuestionValid" class="text-danger Name Question"> </span>
+                                <input type="button" id="btnCreateButton" value="Create Question" class="btn btn-default hidden" onclick="GetPoints();" />
+                                <input type="text" class="form-control" id="Question" placeholder="Type Deal Points here.." />
+                                 <button id="AddDP" class="btn btn-info" onclick="btnCreateButtonClick();" style="background:#129fdd; margin-bottom:10px; margin-top:20px;" type="button">ADD DEAL POINT</button>
+                                <div class="table-responsive loi_content_main">
+                                    <div id="LoiPoints">@Html.Partial("LoiPointList")</div>
+                                </div>*@
+                                @* _________________________________________________________ *@
+                                <button type="submit" class="submit_btn" onclick="return Validate();"><i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Create</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end content -->
+                  
+    <script>
+    $(document).ready(function () {
+        //setting Temp/ View links
+        //var TempID = $('#TemplateID').val();
+        //$("#TempViewID").attr("href", "/Deal/ViewTemp/" + TempID);
+        //$("#TemplateID").change(function () {
+        //    var Selection=$("#TemplateID").val();
+        //    if (Selection == "Please Select" || Selection=="")
+        //    { $('.view_btn').attr('href=#');}
+        //    else { $('#TempViewID').bind('click', false); }
+        //});
+        //___________________________________________
+
+
+        $("#DPicker").datepicker('setDate', new Date());
+        $("#CreatedDate").val($("#DPicker").val());
+        //$('#CreatedDate').addClass('choice form-group form-control input-lg disabled');
+        $('#CreatedDate').css({ "pointer-events": "none" })
+
+    });
+
+    function RouteTemplate() {
+        if ($("#TemplateID").val() != "") {
+            var Property = $("#Property").val();
+            var Template = $("#TemplateID").val();
+            var CreatedDate = $("#CreatedDate").val();
+            var AgentID = $("#AgentID").val();
+            var LandlordID = $("#LandlordID").val();
+            var TenantID = $("#TenantID").val();
+            $("#TempViewID").attr("href", "/Deal/ViewTemp/?Template=" + Template + "&CreatedDate=" + CreatedDate + "&Agent=" + AgentID + "&Landlord=" + LandlordID + "&Tenant=" + TenantID + "&Property=" + Property + "");
+        }
+        else $("#TempViewID").attr("href", "#");
+        }
+
+    function Validate() {
+        var CreatDate = $("#CreatedDate").val();
+        var Property = $("#Property").val();
+        var Agent = $("#AgentID").val();
+        var Tenant = $("#TenantID").val();
+        var Landlord = $("#LandlordID").val();
+        var Template = $("#TemplateID").val();
+        //*********************************************
+        EmptyErrList();
+        if (Property == "") { $("#VProperty").html('Property input required'); }
+        if (Agent == "" || Agent == "Please Select") $("#VAgent").html('Agent selection required');
+        if (Tenant == "" || Tenant == "Please Select") $("#VTenant").html('Tenant selection required');
+        if (Landlord == "" || Landlord == "Please Select") $("#VLandlord").html('Landlord selection required');
+        if (Template == "" || Template == "Please Select") $("#VTemplate").html('Template selection required');
+
+        if (CreatDate != "" && Property != "" && Agent != "" && Tenant != "" && Landlord != "" && Template != "") return true;
+        else {
+            return false;
+        }
+    }
+    function EmptyErrList()
+    {
+        $("#VProperty").html(""); $("#VAgent").html(""); $("#VTenant").html(""); $("#VLandlord").html(""); $("#VTemplate").html("");
+    }
+
+
+        @* ***********     Deal Points ************** *@
+        @*var status = '0';
+        function btnCreateButtonClick() {
+            var a = document.getElementById('btnCreateButton');
+            a.click();
+        }
+       
+        function GetPoints() {
+             
+                var vName = "Nil";
+                var vDescription = "Nil";
+                var vUserID = $("#UserID").val();
+                var vCreatedDate = $("#CreatedDate").val();
+                var vModifiedDate = $("#CreatedDate").val();
+                var vStatus = "0";
+                var vQuestion = $("#Question").val();
+                if (vQuestion != "") {
+                    $('.btnpanel').removeClass('hidden');
+                    $('#QuestionValid').html('');
+                    $("#LoiPoints").load('@(Url.Action("CreateTemp", "Deal", null, Request.Url.Scheme))?' +
+                        'Name=' + encodeURIComponent(vName) +
+                        '&Description=' + encodeURIComponent(vDescription) +
+                        '&UserID=' + encodeURIComponent(vUserID) +
+                        '&CreatedDate=' + encodeURIComponent(vCreatedDate) +
+                        '&ModifiedDate=' + encodeURIComponent(vModifiedDate) +
+                        '&Status=' + encodeURIComponent(vStatus) +
+                        '&Question=' + encodeURIComponent(vQuestion)
+                       );
+                    $("#Question").val("");
+                } else { $('#QuestionValid').html('Please input Dealpoints <br /> '); }
+            
+        }
+    function UpdateTemp(ID) {
+        var vQuestion = $("#" + ('U' + ID)).val();
+        $("#LoiPoints").load('@(Url.Action("UpdateTemp", "LOITemplates", null, Request.Url.Scheme))?' +
+                'id=' + encodeURIComponent(ID) +
+                '&DPoint=' + encodeURIComponent(vQuestion));
+        $("#BtnUpd" + ID).addClass("disabled");
+    }
+    function DeleteTemp(ID) {
+        if (($("#mytable tr ").length) == 1) { $('.btnpanel').addClass('hidden'); }
+        $("#LoiPoints").load('@(Url.Action("DeleteTemp", "LOITemplates", null, Request.Url.Scheme))?' +
+         'id=' + encodeURIComponent(ID));
+    }*@
+        @* ______________________________ *@
+
+
+        $(function () {
+            $("#TemplateID").change(function () {
+                if ($('option:selected', this).text() != 'Please Select') {
+                    $('#TempViewID').removeClass('dis'); $('#TempViewID').removeClass('view_btn_disable');
+                } else { $('#TempViewID').addClass('dis'); $('#TempViewID').addClass('view_btn_disable'); }
+            });
+        });
+
+        </script>
+}
+
+<style>
+    .dis {
+        pointer-events: none;
+    }
+    .view_btn_disable{background-color:#eef2f4}
+</style>
+<script>
+    $(document).ready(function () {
+        if ($("#TemplateID option:selected").text() == 'Please Select') {
+            $('#TempViewID').addClass('dis');
+            $('#TempViewID').addClass('view_btn_disable');
+        }
+        else { $('#TempViewID').removeClass('dis'); $('#TempViewID').removeClass('view_btn_disable'); }
+    });
+
+</script>
+
+
+
+
+ 

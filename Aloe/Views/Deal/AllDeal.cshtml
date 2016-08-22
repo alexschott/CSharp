@@ -1,0 +1,170 @@
+﻿@model IEnumerable<Aloe.DB_Context.Deal>
+
+<div class="table-responsive tab_content_main">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th width="40%" style="text-align: left;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title</th>
+                        <th width="30%" style="text-align: left;">Client Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th width="20%">Date Last Edited&nbsp;&nbsp;&nbsp;&nbsp;</th>
+@if (@ViewBag.DealStatus == "inp" || @ViewBag.DealStatus == "can")
+                                {
+                        <th width="10%"></th>
+}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="tab_content">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td width="40%" style="text-align: left;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @if (item.Status == (int)Aloe.Helper.Status.Initial)
+                                    {
+                                        if (item.UserID.ToString() == @ViewBag.CurrentUserRoleID)
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealInitialTerm", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                        else
+                                        {   <a href="" onclick="alert('Deal initial Terms are not finalized yet for your review.'); return false;">@item.Property</a>
+                                        }
+                                    }
+                                    else if (item.Status == (int)Aloe.Helper.Status.Review)
+                                    {
+                                        @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealClientReview", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                    }
+                                    else if (item.Status == (int)Aloe.Helper.Status.Amendment)
+                                    {
+                                        if (@ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.SuperUser) || @ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.Guest))
+                                        {
+                                            @*<a href="" onclick="alert('Deal Amendment are not finalized yet for your review.'); return false;">@item.Property</a>*@
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealClientReview", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealAmendment", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                    }
+                                    else if (item.Status == (int)Aloe.Helper.Status.Completed || item.Status == (int)Aloe.Helper.Status.Finished)
+                                    {
+                                        if (@ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.SuperUser) || @ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.Guest))
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealClientReview", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealFinish", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                    }
+                                    else if (item.Status == (int)Aloe.Helper.Status.Cancelled)
+                                    { @item.Property}
+                                </td>
+                                <td width="30%" style="text-align: left;">
+                                    @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                                </td>
+                                <td width="20%">
+                                    @{ var dd = Convert.ToString(string.Format("{0:MM/dd/yyyy HH:mm}", item.ModifiedDate));
+                                    @Html.DisplayFor(modelItem => dd)
+                                    }
+
+                                    @*@Html.DisplayFor(modelItem => item.ModifiedDate)*@
+                                </td>
+                                @if (@ViewBag.DealStatus == "inp")
+                                {
+                                    if (item.UserID.ToString() == @ViewBag.CurrentUserRoleID) { 
+                                    <td width="10%">
+                                        <a href="#" id=@("BtnDel"+item.ID) onclick="DeleteTemp('@item.ID','@item.Property');"><img src="../../images/del_ico.png"></a>
+                                    </td>
+                                    }
+
+                                    else { <td><a href="#" onclick="alert('You are not the Creator of this deal.'); return false;" ><img src="../../images/del_ico.png"></a> </td>}
+                                }
+                                else if (@ViewBag.DealStatus == "can")
+                                {
+                                    if (item.UserID.ToString() == @ViewBag.CurrentUserRoleID)
+                                    {
+                                        <td width="10%">
+                                            <a href="#" id=@("BtnDel"+item.ID) onclick="RestoreTemp('@item.ID','@item.Property');"><img src="../../images/restore_ico.png"></a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td><a href="#" onclick="alert('You are not the Creator of this deal.'); return false;"><img src="../../images/restore_ico.png"></a> </td>
+                                    }
+                                }
+                                                             
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+ <!-- modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="closebutton" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                Reason<br>
+                <textarea class="form-control" rows="3" id="TxtMessage"></textarea>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary">Cancel</button>*@
+                <a href="~/Deal/DealCancel" class="btn btn-primary" id="BtnCancelDeal" onclick="return CancelDeal(this);">Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end modal -->
+<a href="~/Deal/RestoreCancel" class="btn btn-primary hidden" id="BtnRestorelDeal">Save</a>
+<script>
+    function RestoreTemp(item) {
+        if (confirm("Are you sure you want to Restore deal to In Progress?")) {
+            window.location = "/Deal/RestoreCancel?DlID=" + item + "";
+            //$('#BtnRestorelDeal').attr("href", $("#BtnRestorelDeal").attr("href") + "?DlID=" + item);
+            //var a = document.getElementById('BtnRestorelDeal'); a.click();
+        }
+
+    }
+    function DeleteTemp(Item,property) {        
+        var a = confirm("Are you sure you want to Cancel this Deal.");
+        if (a) {
+            openmodel(Item, property);
+        } else {  }
+    }
+    function openmodel(id, property) {
+        var idd = id;
+        $('#BtnCancelDeal').attr("href", $("#BtnCancelDeal").attr("href") + "?DlID=" + id);
+        $("#myModalLabel").text(property);
+        $('#myModal').modal('show');
+    }
+    function CancelDeal(elem) {
+        var msg = $("#TxtMessage").val();
+        if (msg == null || msg == "") { alert('Proper reason required for cancelling a deal'); return false; }
+        else {
+            var conf = confirm("Are you sure you want to Delete.");
+            if (conf) {
+                $(elem).attr("href", $(elem).attr("href") + "&Msg=" + msg);
+                alert('Deal is deleted successfully');
+                return true;
+            } else { closemdel();return false; }
+            
+        }
+    }
+    function closemdel() {
+        var a = document.getElementById('closebutton');
+        a.click();
+    }
+</script>

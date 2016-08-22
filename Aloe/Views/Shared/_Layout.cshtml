@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aloe </title>
+     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/InputMask")
+
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    @RenderSection("scripts", required: false)
+   
+</head>
+<body>
+    @*<div>@Html.Partial("_LoginPartial")</div>*@
+    <div class="container-fluid" id="wrap">
+     
+
+        <div class="container login_center">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center logo" style="cursor: pointer; "> <img src="~/images/logo.png" onclick="GoHOme(); "> </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <a href="~/home" class="hidden" id="home"> </a>
+
+        <!-- nav -->
+        <div class="row">
+            <div class="nav_bg">
+                <div class="container">
+                    <!-- Static navbar -->
+                    <div class="navbar-header">
+                        <button type="button" class="menu_button collapsed" data-toggle="collapse" data-target=".navbar-collapse"></button>
+                    </div>
+                    <div class="nav_center">
+                        <div class=" navbar-collapse collapse">
+                            <!-- Left nav -->
+                            <ul class="nav navbar-nav">
+                                <li><span class="aloe_nav"><img style="vertical-align:bottom" src="~/images/aloe_ico.png">&nbsp;Aloe</span></li>
+                                <li><a href="/Home"><img style="vertical-align:inherit" src="~/images/nav_icon_1.png">&nbsp;HOME</a></li>
+                                @*<li><a href="/LOITemplates/TemplatePoints"><i class="fa fa-pencil-square-o"></i>&nbsp;Create DEAL</a></li>*@
+                                @*<li><a href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Create DEAL</a></li>*@
+                                <li><a href="/Deal/Create"><i class="fa fa-pencil-square-o"></i>&nbsp;Create DEAL</a></li>
+                                <li><a href="#"><img style="vertical-align:inherit" src="~/images/nav_icon_3.png">&nbsp;About Us</a></li>
+                                <li><a href="/settings/"><img style="vertical-align:inherit" src="~/images/nav_icon_4.png">&nbsp;Settings</a></li>
+                                <li><a href="#"><img style="vertical-align:inherit" src="~/images/nav_icon_5.png">&nbsp;Support</a></li>
+                                <li>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Sign Out</a>
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <!-- end nav --> 
+
+        @RenderBody()
+    </div>
+    <footer>
+        <div id="footer">
+            <div class="container">powered by Aloe</div>
+        </div>
+    </footer>
+    <script>
+    jQuery(function ($) {
+        $("#Phone").mask("999-99-9999");
+        if (getUrlVars() == 'Un-Auth') { alert('You are not allowed to Create Deal'); }
+    });
+
+    function GoHOme() {
+        var a = document.getElementById('home');
+        a.click();
+    }
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+    </script>
+
+
+     
+     
+</body>
+
+
+</html>

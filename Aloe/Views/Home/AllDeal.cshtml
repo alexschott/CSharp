@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Aloe.DB_Context.Deal>
+
+<div class="table-responsive tab_content_main">
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th width="30%" style="text-align: left;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title</th>
+                        <th width="30%" align="left" style="float: left; width: 100%;  margin: 0 0 0 -13px;">Client Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th width="30%">Date Last Edited&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <div class="tab_content">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        @{ var i = 0; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td width="40%" style="text-align: left;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @if (item.Status ==(byte) Aloe.Helper.Status.Initial)
+                                    {
+                                        if (item.UserID == @ViewBag.CurrentUserRoleID)
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealInitialTerm", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                        else
+                                        {
+                                            <a href="" onclick="alert('Deal initial Terms are not finalized yet for your review.'); return false;" >@item.Property</a>
+                                        }                                        
+                                    }
+                                    else if (item.Status == 5)
+                                    {
+                                        @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealClientReview", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                    }
+                                    else if (item.Status == (byte)Aloe.Helper.Status.Amendment)
+                                    {
+                                        if (@ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.SuperUser) || @ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.Guest))
+                                        {
+                                            @*<a href="" onclick="alert('Deal Amendment are not finalized yet for your review.'); return false;">@item.Property</a>*@
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealClientReview", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                        else
+                                        {@Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealAmendment", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })  }
+                                    }
+                                    else if (item.Status == (byte)Aloe.Helper.Status.Completed || item.Status == (byte)Aloe.Helper.Status.Finished)
+                                    {
+                                        if (@ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.SuperUser) || @ViewBag.RoleID == Convert.ToInt32(@Aloe.Helper.UserRole.Guest))
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealClientReview", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink((Convert.IsDBNull(item.Property)) ? "Property" : item.Property, "../Deal/DealFinish", new { DealID = Aloe.Helper.RouteSecurity.encrypt(item.ID.ToString()) })
+
+                                        }
+                                    }
+                                </td>
+                                <td width="30%" style="text-align: left ;">
+                                    @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                                </td>
+                                <td width="30%">
+                                    @{ var dd = Convert.ToString(string.Format("{0:MM/dd/yyyy HH:mm}", item.ModifiedDate));
+                                    @Html.DisplayFor(modelItem => dd)
+                                    }
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                       
+                    </table>
+                   @if (i == 0)
+                   {
+                    <div style="margin: 16% 0 0 0; text-align: center;  text-transform: none;font-weight: 400;"> No Record found.</div>
+                   }
+                    
+                </div>
+               
+            </td>
+        </tr>
+    </table>
+</div>

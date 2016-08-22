@@ -1,0 +1,156 @@
+﻿@model Aloe.Models.LOITemplatePointM
+
+@{
+    Layout = "~/Views/Deal/_DealLayout.cshtml";
+}
+
+
+<style>
+    a.edit {
+        background: url(../images/edit_ico.png) no-repeat top left;
+        display: block;
+        text-indent: -9999px; /* hides the link text */
+    }
+
+    a.delete {
+        background: url(../images/del_ico.png) no-repeat top left;
+        display: block;
+        text-indent: -9999px; /* hides the link text */
+    }
+</style>
+
+<script>
+    function GetDReview(elem, status) {
+        var IniTrms = $("#Ini" + elem.id).val();
+        var id = elem.id;
+        var EncTempID = $("#EncrptedTempID").val();
+        //var TempID = $("#Tp" + elem.id).val();
+        $(elem).attr('href', $(elem).attr('href') + '?DReview=' + IniTrms + '&TempPid=' + id + '&TempID=' + EncTempID + '&DStatus=' + status);
+        //$(elem).attr('href', $(elem).attr('href') + '?DReview=' + DReview + '&id=' + id + '&TempID=' + EncTempID + '&DStatus=' + status);
+
+    }
+    function DelDReview(elem) {
+        var id = elem.id;
+        var TempID = $("#EncrptedTempID").val();
+        $(elem).attr('href', $(elem).attr('href') + '?id=' + id + '&TempID=' + TempID);
+    }
+    function Validate(Btn) {
+        //return false;
+        //var param = Btn;
+        //if ($("#CheckAll").prop('checked')) param = param + "_checkall";
+        $("#BtnStatus").val(Btn);
+        return true;
+    }
+</script>
+
+
+
+@using (Html.BeginForm("SaveDealAmendment", "Deal", new { DID = Request.Params["DealID"] }))
+{
+    <div class="bread_crumb">
+        <ul>
+            <li>
+                <img src="~/images/check_ico1.jpg">
+                <div>STARTED</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>INITIAL TERMS</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>CLIENT REVIEW</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>AMENDMENTS</div>
+            </li>
+            <li>
+                <img src="~/images/dote_ico2.jpg">
+                <div>FINISH</div>
+            </li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+
+            <!-- content -->
+            <div class="">
+                <div class="deal_heading">
+                    <h1> @ViewBag.DealTopTitle.</h1>
+                    <h2>@ViewBag.DealSubTopTitle</h2>
+                </div>
+                <div><p style=" color:#29a329;"><b>@ViewBag.Msg</b></p></div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="right" valign="middle">
+                                    <div class="submit_checkbox">
+                                        <input type="hidden" id="BtnStatus" name="BtnStatus" value="SD" />
+                                        @*@Html.CheckBoxFor(m => m.CheckAll, new { @id = "CheckAll" })
+                                            @Html.LabelFor(m => m.CheckAll, "Accept All..", new { @class = "checkbox" })*@
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <table class="deal_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <th> Deal Points </th>
+                                            <th>Initial Terms</th>
+                                            <th>Client Review</th>
+                                        </tr>
+                                        @Html.HiddenFor(m => m.EncrptedTempID)
+                                        @for (int i = 0; i < @Model.LoiTemPointsM.Count(); i++)
+                                        {
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].ID)
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].DealPoint)
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].TempId)
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].DpStatus)
+                                            <tr>
+                                                <td align="left" valign="middle" width="25%"> @Html.DisplayFor(m => @Model.LoiTemPointsM[i].DealPoint)</td>
+                                                @if (@Model.LoiTemPointsM[i].DpStatus == Aloe.Helper.Status.Accept)
+                                                {
+                                                    <td align="left" valign="middle" width="25%">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].InitialValue, new { id = ("Ini" + @Model.LoiTemPointsM[i].ID) }) </td>
+                                                    <td align="left" valign="middle" width="40%" style="position:relative;">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].DReview)@*<div class="needreview">accepted</div>*@</td>
+                                                }
+                                                else if (@Model.LoiTemPointsM[i].DpStatus == Aloe.Helper.Status.Review)
+                                                {
+                                                    <td align="left" valign="middle" width="25%">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].InitialValue, new { id = ("Ini" + @Model.LoiTemPointsM[i].ID) })</td>
+                                                    <td align="left" valign="middle" width="40%" style="position:relative;">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].DReview) <div class="needreview">Need review</div></td>
+                                                }
+                                                else
+                                                {
+
+                                                    <td align="left" valign="middle" width="25%">@Html.TextBoxFor(mbox => @Model.LoiTemPointsM[i].InitialValue, new { id = ("Ini" + @Model.LoiTemPointsM[i].ID) })</td>
+                                                    <td align="left" valign="middle" width="40%" style="position:relative;">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].DReview) </td>
+
+                                                }
+                                            </tr>
+                                        }
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    <div class="text-right" style="padding-top:30px">
+                                        <button class="save_as_btn" type="submit" onclick="return Validate('draft');">SAVE AS DRAFT</button>
+                                        <button class="save_btn" type="submit" onclick="return Validate('save');">SUBMIT</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+        </div>
+    </div>
+
+}
+<script src="~/Scripts/DealMessageLoader.js"></script>
+

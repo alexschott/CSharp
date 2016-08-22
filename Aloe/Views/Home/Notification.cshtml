@@ -1,0 +1,44 @@
+﻿ @model IEnumerable<Aloe.Models.DNotificationM>
+ 
+<div class="register_heading">
+    <h1>Notifications</h1>
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="container">
+        <div class=" col-md-offset-2 col-md-8">
+            <div class="notification">
+                <ul>
+                    @foreach (Aloe.Models.DNotificationM item in Model)
+                    {
+                        @*<a href="#">*@
+                            <li>
+                                <span>@item.message<br>@Aloe.Helper.UI.DealDateFormat(item.LogDate)</span>
+                                
+                            </li>
+                        @*</a>*@
+                        @*@Html.DisplayFor(m => item.message)*@
+                    }
+                    <p>&nbsp;</p>
+                    <br>
+                    <div style="text-align:center;">
+                        @if(Model.Count()>0)
+                        { 
+                        <a href="/Home/LoadPreviousNotification">View Previous Notifications</a>
+                        }
+                        else
+                        {<div style=" margin-top:23%;"> No notifications found.</div> }
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ 
+

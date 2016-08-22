@@ -1,0 +1,1226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_Main_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="60" />
+          <Property Name="Street" Type="varchar" MaxLength="200" />
+          <Property Name="City" Type="varchar" MaxLength="60" />
+          <Property Name="State" Type="varchar" MaxLength="60" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="60" />
+          <Property Name="RememberMe" Type="bit" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Company" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DealHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+          <Property Name="EntityName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DealID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="HistoryMessage" Type="varchar" MaxLength="300" />
+          <Property Name="historyStatus" Type="int" Nullable="false" />
+          <Property Name="HistoryNotification" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DealMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DealID" Type="int" Nullable="false" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Receiver" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="300" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="SendDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DealPoints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DealReview" Type="varchar" MaxLength="500" />
+          <Property Name="TemplatePointsID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="Deal_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="PropertyID" Type="int" Nullable="false" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AgentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="TenantID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LandlordID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Property" Type="varchar(max)" />
+          <Property Name="Reason" Type="varchar(max)" />
+          <Property Name="CancelDate" Type="datetime" />
+          <Property Name="LastDealSttaus" Type="int" />
+        </EntityType>
+        <EntityType Name="LOITemplatePoints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DealPoint" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="InitialValue" Type="varchar" MaxLength="1000" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOITemplates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MLOITemplatePoints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DealPoint" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="InitialValue" Type="varchar" MaxLength="1000" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MLOITemplates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DealMessa__DealI__40058253">
+          <End Role="Deals" Type="Self.Deals" Multiplicity="1" />
+          <End Role="DealMessage" Type="Self.DealMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealMessage">
+              <PropertyRef Name="DealID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealMessa__Recei__41EDCAC5">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="DealMessage" Type="Self.DealMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealMessage">
+              <PropertyRef Name="Receiver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealMessa__Sende__40F9A68C">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="DealMessage" Type="Self.DealMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealMessage">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealPoint__Deal___14270015">
+          <End Role="Deals" Type="Self.Deals" Multiplicity="1" />
+          <End Role="DealPoints" Type="Self.DealPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deals">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealPoints">
+              <PropertyRef Name="Deal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealPoint__Templ__5BE2A6F2">
+          <End Role="LOITemplatePoints" Type="Self.LOITemplatePoints" Multiplicity="1" />
+          <End Role="DealPoints" Type="Self.DealPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplatePoints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealPoints">
+              <PropertyRef Name="TemplatePointsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealPoint__Templ__76969D2E">
+          <End Role="LOITemplatePoints" Type="Self.LOITemplatePoints" Multiplicity="1" />
+          <End Role="DealPoints" Type="Self.DealPoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplatePoints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealPoints">
+              <PropertyRef Name="TemplatePointsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__AgentID__52593CB8">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__AgentID__797309D9">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__LandlordI__5165187F">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="LandlordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__LandlordI__7A672E12">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="LandlordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__TemplateI__4AB81AF0">
+          <End Role="LOITemplates" Type="Self.LOITemplates" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__TemplateI__7B5B524B">
+          <End Role="LOITemplates" Type="Self.LOITemplates" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__TenantID__534D60F1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="TenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__TenantID__7C4F7684">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="TenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__UserID__4D94879B">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__UserID__7D439ABD">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LOITempla__Templ__5AEE82B9">
+          <End Role="LOITemplates" Type="Self.LOITemplates" Multiplicity="1" />
+          <End Role="LOITemplatePoints" Type="Self.LOITemplatePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOITemplatePoints">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LOITempla__Templ__778AC167">
+          <End Role="LOITemplates" Type="Self.LOITemplates" Multiplicity="1" />
+          <End Role="LOITemplatePoints" Type="Self.LOITemplatePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOITemplatePoints">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LOITempla__UserI__5441852A">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="LOITemplates" Type="Self.LOITemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LOITemplates">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LOITempla__UserI__787EE5A0">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="LOITemplates" Type="Self.LOITemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LOITemplates">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MLOITempl__Templ__2BFE89A6">
+          <End Role="MLOITemplates" Type="Self.MLOITemplates" Multiplicity="1" />
+          <End Role="MLOITemplatePoints" Type="Self.MLOITemplatePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MLOITemplatePoints">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MLOITempl__Templ__2CF2ADDF">
+          <End Role="MLOITemplates" Type="Self.MLOITemplates" Multiplicity="1" />
+          <End Role="MLOITemplatePoints" Type="Self.MLOITemplatePoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MLOITemplatePoints">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MLOITempl__UserI__29221CFB">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="MLOITemplates" Type="Self.MLOITemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MLOITemplates">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_Main_ModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealHistory" EntityType="Self.DealHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealMessage" EntityType="Self.DealMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealPoints" EntityType="Self.DealPoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOITemplatePoints" EntityType="Self.LOITemplatePoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOITemplates" EntityType="Self.LOITemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MLOITemplatePoints" EntityType="Self.MLOITemplatePoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MLOITemplates" EntityType="Self.MLOITemplates" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DealMessa__DealI__40058253" Association="Self.FK__DealMessa__DealI__40058253">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealMessage" EntitySet="DealMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealMessa__Recei__41EDCAC5" Association="Self.FK__DealMessa__Recei__41EDCAC5">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DealMessage" EntitySet="DealMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealMessa__Sende__40F9A68C" Association="Self.FK__DealMessa__Sende__40F9A68C">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DealMessage" EntitySet="DealMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealPoint__Deal___14270015" Association="Self.FK__DealPoint__Deal___14270015">
+            <End Role="Deals" EntitySet="Deals" />
+            <End Role="DealPoints" EntitySet="DealPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealPoint__Templ__5BE2A6F2" Association="Self.FK__DealPoint__Templ__5BE2A6F2">
+            <End Role="LOITemplatePoints" EntitySet="LOITemplatePoints" />
+            <End Role="DealPoints" EntitySet="DealPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealPoint__Templ__76969D2E" Association="Self.FK__DealPoint__Templ__76969D2E">
+            <End Role="LOITemplatePoints" EntitySet="LOITemplatePoints" />
+            <End Role="DealPoints" EntitySet="DealPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__AgentID__52593CB8" Association="Self.FK__Deals__AgentID__52593CB8">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__AgentID__797309D9" Association="Self.FK__Deals__AgentID__797309D9">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__LandlordI__5165187F" Association="Self.FK__Deals__LandlordI__5165187F">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__LandlordI__7A672E12" Association="Self.FK__Deals__LandlordI__7A672E12">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__TemplateI__4AB81AF0" Association="Self.FK__Deals__TemplateI__4AB81AF0">
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__TemplateI__7B5B524B" Association="Self.FK__Deals__TemplateI__7B5B524B">
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__TenantID__534D60F1" Association="Self.FK__Deals__TenantID__534D60F1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__TenantID__7C4F7684" Association="Self.FK__Deals__TenantID__7C4F7684">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__UserID__4D94879B" Association="Self.FK__Deals__UserID__4D94879B">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__UserID__7D439ABD" Association="Self.FK__Deals__UserID__7D439ABD">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LOITempla__Templ__5AEE82B9" Association="Self.FK__LOITempla__Templ__5AEE82B9">
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+            <End Role="LOITemplatePoints" EntitySet="LOITemplatePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LOITempla__Templ__778AC167" Association="Self.FK__LOITempla__Templ__778AC167">
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+            <End Role="LOITemplatePoints" EntitySet="LOITemplatePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LOITempla__UserI__5441852A" Association="Self.FK__LOITempla__UserI__5441852A">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LOITempla__UserI__787EE5A0" Association="Self.FK__LOITempla__UserI__787EE5A0">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MLOITempl__Templ__2BFE89A6" Association="Self.FK__MLOITempl__Templ__2BFE89A6">
+            <End Role="MLOITemplates" EntitySet="MLOITemplates" />
+            <End Role="MLOITemplatePoints" EntitySet="MLOITemplatePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MLOITempl__Templ__2CF2ADDF" Association="Self.FK__MLOITempl__Templ__2CF2ADDF">
+            <End Role="MLOITemplates" EntitySet="MLOITemplates" />
+            <End Role="MLOITemplatePoints" EntitySet="MLOITemplatePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MLOITempl__UserI__29221CFB" Association="Self.FK__MLOITempl__UserI__29221CFB">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MLOITemplates" EntitySet="MLOITemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_Main_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Street" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="RememberMe" Type="Boolean" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK__Deals__AgentID__52593CB8" FromRole="AspNetUsers" ToRole="Deals" />
+          <NavigationProperty Name="Deals1" Relationship="Self.FK__Deals__LandlordI__5165187F" FromRole="AspNetUsers" ToRole="Deals" />
+          <NavigationProperty Name="Deals2" Relationship="Self.FK__Deals__TenantID__534D60F1" FromRole="AspNetUsers" ToRole="Deals" />
+          <NavigationProperty Name="Deals3" Relationship="Self.FK__Deals__UserID__4D94879B" FromRole="AspNetUsers" ToRole="Deals" />
+          <NavigationProperty Name="LOITemplates" Relationship="Self.FK__LOITempla__UserI__5441852A" FromRole="AspNetUsers" ToRole="LOITemplates" />
+          <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MLOITemplates" Relationship="DB_Main_Model.FK__MLOITempl__UserI__29221CFB" FromRole="AspNetUser" ToRole="MLOITemplate" />
+          <NavigationProperty Name="DealMessages" Relationship="DB_Main_Model.FK__DealMessa__Recei__3D2915A8" FromRole="AspNetUser" ToRole="DealMessage" />
+          <NavigationProperty Name="DealMessages1" Relationship="DB_Main_Model.FK__DealMessa__Sende__3C34F16F" FromRole="AspNetUser" ToRole="DealMessage" />
+        </EntityType>
+        <EntityType Name="DealPoint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DealReview" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TemplatePointsID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="LOITemplatePoint" Relationship="Self.FK__DealPoint__Templ__5BE2A6F2" FromRole="DealPoints" ToRole="LOITemplatePoints" />
+          <Property Name="Deal_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Deal" Relationship="DB_Main_Model.FK__DealPoint__Deal___14270015" FromRole="DealPoint" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyID" Type="Int32" Nullable="false" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgentID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="TenantID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LandlordID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Deals__AgentID__52593CB8" FromRole="Deals" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser1" Relationship="Self.FK__Deals__LandlordI__5165187F" FromRole="Deals" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser2" Relationship="Self.FK__Deals__TenantID__534D60F1" FromRole="Deals" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser3" Relationship="Self.FK__Deals__UserID__4D94879B" FromRole="Deals" ToRole="AspNetUsers" />
+          <NavigationProperty Name="LOITemplate" Relationship="Self.FK__Deals__TemplateI__4AB81AF0" FromRole="Deals" ToRole="LOITemplates" />
+          <Property Name="Property" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DealPoints" Relationship="DB_Main_Model.FK__DealPoint__Deal___14270015" FromRole="Deal" ToRole="DealPoint" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DealMessages" Relationship="DB_Main_Model.FK__DealMessa__DealI__40058253" FromRole="Deal" ToRole="DealMessage" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="LastDealSttaus" Type="Int32" />
+        </EntityType>
+        <EntityType Name="LOITemplatePoint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DealPoint" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InitialValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DealPoints" Relationship="Self.FK__DealPoint__Templ__5BE2A6F2" FromRole="LOITemplatePoints" ToRole="DealPoints" />
+          <NavigationProperty Name="LOITemplate" Relationship="Self.FK__LOITempla__Templ__5AEE82B9" FromRole="LOITemplatePoints" ToRole="LOITemplates" />
+        </EntityType>
+        <EntityType Name="LOITemplate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__LOITempla__UserI__5441852A" FromRole="LOITemplates" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK__Deals__TemplateI__4AB81AF0" FromRole="LOITemplates" ToRole="Deals" />
+          <NavigationProperty Name="LOITemplatePoints" Relationship="Self.FK__LOITempla__Templ__5AEE82B9" FromRole="LOITemplates" ToRole="LOITemplatePoints" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__AgentID__52593CB8">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__LandlordI__5165187F">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="LandlordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__TenantID__534D60F1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="TenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__UserID__4D94879B">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LOITempla__UserI__5441852A">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="LOITemplates" Type="Self.LOITemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LOITemplates">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealPoint__Templ__5BE2A6F2">
+          <End Role="LOITemplatePoints" Type="Self.LOITemplatePoint" Multiplicity="1" />
+          <End Role="DealPoints" Type="Self.DealPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplatePoints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealPoints">
+              <PropertyRef Name="TemplatePointsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__TemplateI__4AB81AF0">
+          <End Role="LOITemplates" Type="Self.LOITemplate" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LOITempla__Templ__5AEE82B9">
+          <End Role="LOITemplates" Type="Self.LOITemplate" Multiplicity="1" />
+          <End Role="LOITemplatePoints" Type="Self.LOITemplatePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOITemplates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOITemplatePoints">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_Main_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRole" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="DealPoints" EntityType="Self.DealPoint" />
+          <EntitySet Name="Deals" EntityType="Self.Deal" />
+          <EntitySet Name="LOITemplatePoints" EntityType="Self.LOITemplatePoint" />
+          <EntitySet Name="LOITemplates" EntityType="Self.LOITemplate" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__AgentID__52593CB8" Association="Self.FK__Deals__AgentID__52593CB8">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__LandlordI__5165187F" Association="Self.FK__Deals__LandlordI__5165187F">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__TenantID__534D60F1" Association="Self.FK__Deals__TenantID__534D60F1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__UserID__4D94879B" Association="Self.FK__Deals__UserID__4D94879B">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LOITempla__UserI__5441852A" Association="Self.FK__LOITempla__UserI__5441852A">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealPoint__Templ__5BE2A6F2" Association="Self.FK__DealPoint__Templ__5BE2A6F2">
+            <End Role="LOITemplatePoints" EntitySet="LOITemplatePoints" />
+            <End Role="DealPoints" EntitySet="DealPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__TemplateI__4AB81AF0" Association="Self.FK__Deals__TemplateI__4AB81AF0">
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LOITempla__Templ__5AEE82B9" Association="Self.FK__LOITempla__Templ__5AEE82B9">
+            <End Role="LOITemplates" EntitySet="LOITemplates" />
+            <End Role="LOITemplatePoints" EntitySet="LOITemplatePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealPoint__Deal___14270015" Association="DB_Main_Model.FK__DealPoint__Deal___14270015">
+            <End Role="Deal" EntitySet="Deals" />
+            <End Role="DealPoint" EntitySet="DealPoints" />
+          </AssociationSet>
+          <EntitySet Name="MLOITemplatePoints" EntityType="DB_Main_Model.MLOITemplatePoint" />
+          <EntitySet Name="MLOITemplates" EntityType="DB_Main_Model.MLOITemplate" />
+          <AssociationSet Name="FK__MLOITempl__UserI__29221CFB" Association="DB_Main_Model.FK__MLOITempl__UserI__29221CFB">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="MLOITemplate" EntitySet="MLOITemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MLOITempl__Templ__2BFE89A6" Association="DB_Main_Model.FK__MLOITempl__Templ__2BFE89A6">
+            <End Role="MLOITemplate" EntitySet="MLOITemplates" />
+            <End Role="MLOITemplatePoint" EntitySet="MLOITemplatePoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MLOITempl__Templ__2CF2ADDF" Association="DB_Main_Model.FK__MLOITempl__Templ__2CF2ADDF">
+            <End Role="MLOITemplate" EntitySet="MLOITemplates" />
+            <End Role="MLOITemplatePoint" EntitySet="MLOITemplatePoints" />
+          </AssociationSet>
+          <EntitySet Name="DealMessages" EntityType="DB_Main_Model.DealMessage" />
+          <AssociationSet Name="FK__DealMessa__Recei__3D2915A8" Association="DB_Main_Model.FK__DealMessa__Recei__3D2915A8">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="DealMessage" EntitySet="DealMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealMessa__Sende__3C34F16F" Association="DB_Main_Model.FK__DealMessa__Sende__3C34F16F">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="DealMessage" EntitySet="DealMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DealMessa__DealI__40058253" Association="DB_Main_Model.FK__DealMessa__DealI__40058253">
+            <End Role="Deal" EntitySet="Deals" />
+            <End Role="DealMessage" EntitySet="DealMessages" />
+          </AssociationSet>
+          <EntitySet Name="DealHistories" EntityType="DB_Main_Model.DealHistory" />
+        </EntityContainer>
+        <Association Name="FK__DealPoint__Deal___14270015">
+          <End Type="DB_Main_Model.Deal" Role="Deal" Multiplicity="1" />
+          <End Type="DB_Main_Model.DealPoint" Role="DealPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealPoint">
+              <PropertyRef Name="Deal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MLOITemplatePoint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DealPoint" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="InitialValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="MLOITemplate" Relationship="DB_Main_Model.FK__MLOITempl__Templ__2BFE89A6" FromRole="MLOITemplatePoint" ToRole="MLOITemplate" />
+          <NavigationProperty Name="MLOITemplate1" Relationship="DB_Main_Model.FK__MLOITempl__Templ__2CF2ADDF" FromRole="MLOITemplatePoint" ToRole="MLOITemplate" />
+        </EntityType>
+        <EntityType Name="MLOITemplate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="DB_Main_Model.FK__MLOITempl__UserI__29221CFB" FromRole="MLOITemplate" ToRole="AspNetUser" />
+          <NavigationProperty Name="MLOITemplatePoints" Relationship="DB_Main_Model.FK__MLOITempl__Templ__2BFE89A6" FromRole="MLOITemplate" ToRole="MLOITemplatePoint" />
+          <NavigationProperty Name="MLOITemplatePoints1" Relationship="DB_Main_Model.FK__MLOITempl__Templ__2CF2ADDF" FromRole="MLOITemplate" ToRole="MLOITemplatePoint" />
+        </EntityType>
+        <Association Name="FK__MLOITempl__UserI__29221CFB">
+          <End Type="DB_Main_Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="DB_Main_Model.MLOITemplate" Role="MLOITemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MLOITemplate">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MLOITempl__Templ__2BFE89A6">
+          <End Type="DB_Main_Model.MLOITemplate" Role="MLOITemplate" Multiplicity="1" />
+          <End Type="DB_Main_Model.MLOITemplatePoint" Role="MLOITemplatePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLOITemplate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MLOITemplatePoint">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MLOITempl__Templ__2CF2ADDF">
+          <End Type="DB_Main_Model.MLOITemplate" Role="MLOITemplate" Multiplicity="1" />
+          <End Type="DB_Main_Model.MLOITemplatePoint" Role="MLOITemplatePoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLOITemplate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MLOITemplatePoint">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DealMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sender" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Receiver" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="DB_Main_Model.FK__DealMessa__Recei__3D2915A8" FromRole="DealMessage" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="DB_Main_Model.FK__DealMessa__Sende__3C34F16F" FromRole="DealMessage" ToRole="AspNetUser" />
+          <Property Name="DealID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Deal" Relationship="DB_Main_Model.FK__DealMessa__DealI__40058253" FromRole="DealMessage" ToRole="Deal" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__DealMessa__Recei__3D2915A8">
+          <End Type="DB_Main_Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="DB_Main_Model.DealMessage" Role="DealMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealMessage">
+              <PropertyRef Name="Receiver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealMessa__Sende__3C34F16F">
+          <End Type="DB_Main_Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="DB_Main_Model.DealMessage" Role="DealMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealMessage">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DealMessa__DealI__40058253">
+          <End Type="DB_Main_Model.Deal" Role="Deal" Multiplicity="1" />
+          <End Type="DB_Main_Model.DealMessage" Role="DealMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealMessage">
+              <PropertyRef Name="DealID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DealHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EntityName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DealID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="HistoryMessage" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="historyStatus" Type="Int32" Nullable="false" />
+          <Property Name="HistoryNotification" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_Main_ModelStoreContainer" CdmEntityContainer="DB_Main_Entities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DB_Main_Model.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="DB_Main_Model.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DB_Main_Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="RememberMe" ColumnName="RememberMe" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealPoints">
+            <EntityTypeMapping TypeName="DB_Main_Model.DealPoint">
+              <MappingFragment StoreEntitySet="DealPoints">
+                <ScalarProperty Name="Deal_ID" ColumnName="Deal_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DealReview" ColumnName="DealReview" />
+                <ScalarProperty Name="TemplatePointsID" ColumnName="TemplatePointsID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deals">
+            <EntityTypeMapping TypeName="DB_Main_Model.Deal">
+              <MappingFragment StoreEntitySet="Deals">
+                <ScalarProperty Name="LastDealSttaus" ColumnName="LastDealSttaus" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Property" ColumnName="Property" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+                <ScalarProperty Name="LandlordID" ColumnName="LandlordID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOITemplatePoints">
+            <EntityTypeMapping TypeName="DB_Main_Model.LOITemplatePoint">
+              <MappingFragment StoreEntitySet="LOITemplatePoints">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DealPoint" ColumnName="DealPoint" />
+                <ScalarProperty Name="InitialValue" ColumnName="InitialValue" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOITemplates">
+            <EntityTypeMapping TypeName="DB_Main_Model.LOITemplate">
+              <MappingFragment StoreEntitySet="LOITemplates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MLOITemplatePoints">
+            <EntityTypeMapping TypeName="DB_Main_Model.MLOITemplatePoint">
+              <MappingFragment StoreEntitySet="MLOITemplatePoints">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="InitialValue" ColumnName="InitialValue" />
+                <ScalarProperty Name="DealPoint" ColumnName="DealPoint" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MLOITemplates">
+            <EntityTypeMapping TypeName="DB_Main_Model.MLOITemplate">
+              <MappingFragment StoreEntitySet="MLOITemplates">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealMessages">
+            <EntityTypeMapping TypeName="DB_Main_Model.DealMessage">
+              <MappingFragment StoreEntitySet="DealMessage">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="DealID" ColumnName="DealID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealHistories">
+            <EntityTypeMapping TypeName="DB_Main_Model.DealHistory">
+              <MappingFragment StoreEntitySet="DealHistory">
+                <ScalarProperty Name="HistoryNotification" ColumnName="HistoryNotification" />
+                <ScalarProperty Name="historyStatus" ColumnName="historyStatus" />
+                <ScalarProperty Name="HistoryMessage" ColumnName="HistoryMessage" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DealID" ColumnName="DealID" />
+                <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

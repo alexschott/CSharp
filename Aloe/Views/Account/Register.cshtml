@@ -1,0 +1,190 @@
+﻿@model Aloe.Models.RegisterViewModel
+@{ Layout = "";}
+@{
+    ViewBag.Title = "Register";
+}
+
+@*<h2>@ViewBag.Title.</h2>*@
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/InputMask")
+<link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container login_center" id="wrap">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center logo">
+                <a href="/Account/Login"><img src="~/Content/images/logo.png"></a>
+            </div>
+            <div class="register_heading">
+                <h1>Register Here</h1>
+            </div>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @style = "color:a94442;" ,@class="nobullet"})
+
+                <div class="form-group input-group form-group_margin">
+                    <i class="fa fa-question-circle imp_ico" data-toggle="tooltip" data-placement="left" title="Only alphabet(s)"></i>
+                    <span class="input-group-addon"><img src="~/Content/images/user_ico.png"></span>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control input-lg", @PlaceHolder = "NAME" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <i class="fa fa-question-circle imp_ico" data-toggle="tooltip" data-placement="left" title="Email (i.e. abc@abc.com)"></i>
+                    <span class="input-group-addon"><i style="color:#c8d3dc; font-size:18px" class="fa fa-envelope-o"></i></span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @PlaceHolder = "EMAIL" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <i class="fa fa-question-circle imp_ico" data-toggle="tooltip" data-placement="left" title="Password must be a combination of Alphabets (Upper and Lowercase), Numbers and Special Characters (i.e. Abc123*)"></i>
+                    <span class="input-group-addon">&nbsp;<img src="~/Content/images/lock.png"></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @Placeholder = "PASSWORD", @Type = "Password" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <i class="fa fa-question-circle imp_ico" data-toggle="tooltip" data-placement="left" title="Password and Confirm password fields should be same"></i>
+                    <span class="input-group-addon">&nbsp;<img src="~/Content/images/lock.png"></span>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-lg", @Placeholder = "CONFIRM PASSWORD", @Type = "Password" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <span class="input-group-addon">&nbsp;<i style="color:#c8d3dc; font-size:21px" class="fa fa-phone"></i></span>
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control input-lg", @PlaceHolder = "PHONE", @maxlength = "29" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <span class="input-group-addon"><i style="color:#c8d3dc; font-size:19px" class="fa fa-ils"></i></span>
+                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control input-lg", @PlaceHolder = "COMPANY", @maxlength = "160" })
+                </div>
+
+                <div class="form-group input-group imp form-group_margin">
+                    <span class="input-group-addon"><i style="color:#c8d3dc; font-size:19px" class="fa fa-ils"></i></span>
+                    @Html.TextBoxFor(m => m.Street, new { @class = "form-control input-lg", @PlaceHolder = "STREET", @maxlength = "160" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <span class="input-group-addon">&nbsp;<i style="color:#c8d3dc; font-size:19px" class="fa fa-level-up"></i></span>
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control input-lg", @PlaceHolder = "CITY", @maxlength = "60" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <span class="input-group-addon"><i style="color:#c8d3dc; font-size:19px" class="fa fa-location-arrow"></i></span>
+                    <select id="st" class="choice form-group form-control input-lg form-group_margin disabled">
+                        <option value="0">Please Select</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                    @Html.TextBoxFor(m => m.State, new { @class = "form-control input-lg hidden", @PlaceHolder = "STATE", @maxlength = "60" })
+                </div>
+                <div class="form-group input-group imp form-group_margin">
+                    <span class="input-group-addon"><i style="color:#c8d3dc; font-size:19px" class="fa fa-ellipsis-h"></i></span>
+                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control input-lg", @PlaceHolder = "POSTALCODE", @maxlength = "30" })
+                </div>
+
+                @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, new { @class = "choice form-group form-control input-lg form-group_margin" })
+                <div class="row" style="margin-left:-15px; margin-right:-15px;">
+                    <div class="col-md-12">
+                        <button type="submit" class="reg_btn2">
+                            <i style="font-size:18px" class="fa fa-key"></i>&nbsp;&nbsp;REGISTER
+                        </button>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="doted_line">&nbsp;</div>
+                    </div>
+                    <div class="col-md-12">
+                        <script type="text/javascript">
+                            function Redirect(url) {
+                                window.location = url;
+                            }
+                        </script>
+                        <button type="button" class="reg_btn" onclick="Redirect('ForgotPassword');">
+                            <i style="font-size:16px" class="fa fa-warning tooltips"></i>&nbsp;&nbsp;having trouble?
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<footer>
+    <div id="footer">
+        <div class="container">powered by Aloe</div>
+    </div>
+</footer>
+
+<script>
+    jQuery(function ($) {
+        $("#Phone").mask("999-99-9999");
+        $("#st").change(function () {
+            var end = this.value;
+            var firstDropVal = $('#pick').val();
+            document.getElementById('State').value = end;
+        });
+    });
+</script>
+
+<style>
+    .nobullet {
+        float: none;
+    }
+
+        .nobullet ul {
+            list-style-type: none;
+        }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

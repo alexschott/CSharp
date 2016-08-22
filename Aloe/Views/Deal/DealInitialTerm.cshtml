@@ -1,0 +1,116 @@
+﻿@model IList<Aloe.DB_Context.LOITemplatePoint>
+@{ Layout = "~/Views/Deal/_DealLayout.cshtml";}
+
+
+@using (Html.BeginForm("SaveDealInitTerm", "Deal", new { DealId = Request.Params["DealID"]}))
+{
+    <div class="bread_crumb">
+        <ul>
+            <li>
+                <img src="~/images/check_ico1.jpg">
+                <div>STARTED</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>INITIAL TERMS</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/dote_ico.jpg">
+                <div>CLIENT REVIEW</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/dote_ico.jpg">
+                <div>AMENDMENTS</div>
+            </li>
+            <li>
+                <img src="~/images/dote_ico2.jpg">
+                <div>FINISH</div>
+            </li>
+        </ul>
+    </div>
+     <!-- content -->
+    <div class="">
+        <div class="deal_heading">
+            <h1> @ViewBag.DealTopTitle.</h1>
+            <h2>@ViewBag.DealSubTopTitle</h2>
+        </div>
+        <div><p style=" color:#29a329;" id="MSucc"><b>@ViewBag.Msg</b></p></div>
+        <div><p id="errorMessage" style=" color:red;"><b></b></p></div>
+        <div class="row">
+            <div class="table-responsive">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="left" valign="middle">
+                            <table class="deal_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                                @*<tr>
+                                        <th>
+                                            Deal Point
+                                        </th>
+                                        <th>
+                                            Initial Value
+                                        </th>
+
+                                        <th></th>
+                                    </tr>*@
+                                @for (int t = 0; t < Model.Count(); t++)
+                                {
+                                    @Html.HiddenFor(m => m[t].ID)
+                                    @Html.HiddenFor(m => m[t].DealPoint)
+                                    @Html.HiddenFor(m => m[t].TemplateID)
+                                    <tr>
+                                        <td align="left" valign="middle" width="300"> @Html.DisplayFor(mbox => mbox[t].DealPoint, new { @class = "txt" }).ToString()</td>
+                                        <td align="left" valign="middle" width="75%">@Html.EditorFor(mbox => mbox[t].InitialValue)</td>
+                                    </tr>
+                                }
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle">
+                            <div class="text-right" style="padding-top:30px">
+                                <input type="hidden" id="routestatus" name="routestatus" value="0" />
+                                <button class="save_as_btn" type="button" style="float:left; background-color:#7d909c;" onclick="EditTemplate();">EDIT TEMPLATE</button>
+                                <button class="save_as_btn" type="button" onclick="SaveDraft();">SAVE AS DRAFT</button>
+                                <button class="save_btn" type="submit" id="postbk" onclick="return All();">SUBMIT</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+    <script type="text/javascript">
+    function SaveDraft() {
+        $("#routestatus").val(1);
+        $("#postbk").click();
+    }
+    function All() {
+        var status = '0';
+        $(".text-box").each(function () {
+            if ($(this).val() == '') {
+                status = '1';
+            }
+        });
+        $('#MSucc').html('');
+        if (status == '0')
+        {
+            $('#errorMessage').html('');
+            return true;
+        }
+        else { $('#errorMessage').html('You can not leave any field blank.'); return false; }
+    }
+    function EditTemplate()
+    {
+        var DlID =  '@Request.Params["DealID"]' ;
+        var TpID = '@Request.Params["TempID"]';
+        window.location.href = "/Deal/EditTemplate?DID=" + DlID + "&TID=" + TpID
+
+            @*@Url.Action("EditTemplate", "1");*@
+    }
+
+</script>
+    <script src="~/Scripts/DealMessageLoader.js"></script>
+}

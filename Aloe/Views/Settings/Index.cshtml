@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ 
+@Scripts.Render("~/bundles/Graph")
+
+@*<br>
+<br>*@
+@*<div class="container-fluid" id="wrap">*@
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                @*<div class="text-center logo">
+                    <img src="~/Content/images/logo.png">
+                </div>*@
+
+
+                <div class="register_heading">
+                    <h1> @ViewBag.Title</h1>
+
+                    <center>
+                        <h3>
+                            @if (TempData["notice"] != null)
+                            {
+                                <h4>@TempData["notice"]</h4>
+                            }
+                        </h3>
+                    </center>
+                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="jhon_button">
+
+                            <ul>
+
+                                <li>
+                                    <a href="../user/Edit/@ViewBag.ID">
+                                        <span><img src="../../Content/images/account_set_ico.png"></span>
+                                        <span class="dblue2">Manage Personal Details</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/LoiTemplates/">
+                                     <span class="dblue2">Manage LOI Templates</span>
+                                        <span><img src="../../Content/images/jhon_ico3.png"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/Manage/ChangePassword">
+                                        <span><img src="../../Content/images/jhon_ico2.png"></span>
+                                        <span class="dblue2">Change Password</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                                        <span class="dblue2">Sign Out</span>
+                                        <span><img src="../../Content/images/jhon_ico4.png"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    }
+                }
+
+
+
+            </div>
+        
+           <div class="col-md-6 col-md-offset-2">
+                <div class="col-md-10">
+                    <canvas id="DealProdGraphPanel" width="300" height="300"></canvas>
+                </div>
+                <div class="col-md-2 text-center">
+                    <link href="~/Scripts/Graph/CircleStyle.css" rel="stylesheet" />
+                    <div id="CircleReadings"></div>
+                </div>
+            </div>
+        
+        
+        </div>
+        
+         
+
+    </div>
+
+    
+@*</div>*@
+
+
+ 

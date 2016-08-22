@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aloe </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/InputMask")
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+
+    <div class="container-fluid" id="wrap">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="deal_top_bg ">
+                <div class="container deal_container"> </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div id="wrapper">
+            
+             <!--Right Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav message">
+                     <!-- Message Panel Header -->
+                    <li class="sidebar-brand" id="DMessagePanelHeader" style="margin-bottom:-33px;"> </li>
+                    <!-- Message Panel Modal -->
+                    <li>
+                        <div id="demo" class="collapse new_mes_bg">
+                            <div class="form-group" id="DmSelectEntity">
+                                <select class="choice form-group form-control input-lg" id="DmReciever" name="DmReciever"></select>
+                            </div>
+                            <div class="form-group">
+                                <span>Message:</span>
+                                @*<input type="text" class="form-control input-lg" id="DmMessage" value="" placeholder="Type message here.." maxlength="150" />*@
+                                <textarea name="" cols="" rows="" class="form-control" id="DmMessage" value="" placeholder="Type message here.." maxlength="150" style="min-height:130px;"></textarea>
+                            </div>
+                            <div>
+                                <div class="MsgStatuscls">
+                                    <span id="DmSendStatus" style="float: right;"> &nbsp;</span>
+                                </div>
+                                <a class="new_mes_send_btn" id="BtnSendMsg" onclick="SendMessage('@Request.Params["DealID"]');" style="z-index:22;">SEND</a>
+                                @*<button type="button" class="new_mes_send_btn" onclick="SendMessage('@Request.Params["DealID"]');" style="z-index:22;">SEND</button>*@
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Message Panel List -->
+                    <li class="sidebar-brand" id="DMessagelist" style="margin-top:-22px; " > </li>
+                    <li class="sidebar-brand" id="DHistoryPanel" > @*Dynamically History loading*@ </li>
+                </ul>
+            </div>
+
+            <!--Left Sidebar -->
+            <div id="sidebar-wrapper1">
+                <ul class="sidebar-nav1">
+                    <li class="deal_logo">
+                        <a href="/Home/"><img src="~/images/left_logo.jpg"></a>
+                    </li>
+
+                    <ul class="deal_v_menu">
+                        <li><a href="/Home/">Home</a></li>
+                        <li><a href="/Deal/Index">Deals</a></li>
+                     </ul>
+                   
+                   
+                </ul>
+            </div>
+
+            <!--content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid minheight">
+                     @RenderBody()
+                </div>
+              <br /><br /> <div style="text-align:center; float:left; width:100%">POWERED BY ALOE</div>
+                
+            </div>
+             <a href="#menu-toggle" class=" side_right_btn" id="menu-toggle"><img src="~/images/menu_btn2.png">&nbsp;</a>
+            <a href="#menu-toggle1" class=" side_left_btn" id="menu-toggle1">&nbsp;<img src="~/images/menu_btn2.png"></a>
+        </div>
+         <!-- Define content -->
+        <br />
+        <script>
+            //** Enter Event for send message
+            $('#DmMessage').bind("enterKey", function (e) {
+                $("#BtnSendMsg").click();
+            });
+            $('#DmMessage').keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).trigger("enterKey");
+                }
+            });
+        </script>
+         @*Deal Messages*@
+        <script src="~/Scripts/DealMessage.js"></script>
+ 
+     </div>
+
+</body>
+</html>

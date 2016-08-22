@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Aloe.DB_Context.Deal>
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+ 
+ 
+<div class="register_heading">
+     @*<h1>@User.Identity.GetUserName()</h1>*@
+
+    <h1>@ViewBag.UName</h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="icon_button">
+            @*<ul>
+                    <a href="#">
+                        <li><img src="~/images/create_loi-_ico.png"></li>
+                        <li><span class="dblue">Create Loi</span></li>
+                    </a>
+                </ul>*@
+            <ul>
+                <a href="/Settings">
+                    <li><img src="~/images/account_set_ico.png"></li>
+                    <li><span class="dblue">account settings</span></li>
+                </a>
+            </ul>
+            <ul>
+                <a href="/Home/Notification">
+                    <li><img src="~/images/notification_ico.png"></li>
+                    <li><span class="dblue">notifications</span></li>
+                </a>
+            </ul>
+            <ul>
+                <a href="/Deal/Create">
+                    <li><img src="~/images/new_deal.png"></li>
+                    <li><span class="dblue">New Deal</span></li>
+                </a>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="container three_col_wrapper">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><a href="#" onclick="Search();"><i style="color:#c8d3dc; font-size:25px" class="fa fa-search"></i></a></span>
+                    <input type="text" id="txtSearch" placeholder="SEARCH" class="form-control input-lg">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <h1 class="current_deal">Current Deals</h1>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <button type="submit" class="viewall" onclick="document.getElementById('go').click();"><i style="font-size:21px; vertical-align:middle " class="fa fa-eye"></i>&nbsp;&nbsp;VIEW ALL</button>
+            </div>
+            <a class="hidden" id="go" href="/Deal/"></a>
+        </div>
+        <div class="doted_line" >&nbsp;</div>
+        <div class="fullwidth">
+            <div id="error">  </div>
+            <div id="AllDeals">@Html.Partial("AllDeal", Model)</div>
+         </div>
+
+        <div class="doted_line" >&nbsp;</div>
+        @*<div class="fullwidth">
+            <div class="doted_line" style="padding-bottom:20px">&nbsp;</div>
+            <div class="summaries">Summaries</div>
+    <div class="row">
+        <div>
+            <div class="col-md-7 col-sm-7"><img src="~/images/chart.png"></div>
+            <div class="col-md-5 col-sm-5 chat_text">3 Deals signed last week</div>
+        </div>
+        <div style="padding-top:15px; padding-bottom:15px; float:left; width:100%;">
+            <div class="col-md-7 col-sm-7"><img src="~/images/chart.png"></div>
+            <div class="col-md-5 col-sm-5 chat_text"> 2 Deals currently pending</div>
+        </div>
+        <div>
+            <div class="col-md-7 col-sm-7"><img src="~/images/chart.png"></div>
+            <div class="col-md-5 col-sm-5 chat_text">19% Increase from last quarter</div>
+        </div>
+    </div>
+        </div>*@
+    </div>
+</div>
+<br /><br />
+
+
+<script type="text/javascript">
+    function Search() {
+        var Srch = document.getElementById("txtSearch").value;
+        if (Srch != "") Srch = Srch.split(' ').join('');
+        $("#AllDeals").load('@(Url.Action("AllDealSearch", "Home", null, Request.Url.Scheme))?Search=' + Srch);
+    }
+    $('#txtSearch').keypress(function (e) {
+        if (e.which == 13) {
+            Search();
+        }
+    });
+</script>
+
+
+
+@*<div class="row">
+    <div class="col-md-4">
+        <h2>HOME</h2>
+     </div>
+    
+</div>*@

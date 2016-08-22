@@ -1,0 +1,320 @@
+
+
+/* Deal pages CSS */
+
+.deal_top_bg { position:fixed; z-index:9999; padding:13px 0; float:left; width:100%; background:#12aaeb; color:#FFFFFF; text-align:center; font-size:26px; font-weight:bold; text-transform:uppercase;}
+
+.deal_logo { text-align:center; margin:30px 0}
+.side_right_btn { display:none;}
+.side_left_btn { display:none;}
+
+ul.message {} 
+ul.message li { color:#597a96; font-weight:bold; }
+ul.message li span { color:#12aaeb; font-weight:bold;}
+ul.message li h5 { color:#597a96;}
+ul.message li p { color:#95acbc; font-size:14px; font-weight:normal; text-transform:none; line-height:18px; }
+
+
+/* right side */
+
+#menu-toggle {
+    float: right;
+}
+#wrapper {
+    padding-right: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#wrapper.toggled {
+    padding-right: 200px;
+}
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 200px;
+    width: 0;
+    height: 100%;
+    margin-right: -200px;
+    /*overflow-x: hidden;*/
+    background: #f1f5f8;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+    width: 200px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+   /* margin-left: -200px;*/
+}
+/* Sidebar Styles */
+ .sidebar-nav {
+    position: absolute;
+    top: 75px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sidebar-nav li {
+    /*text-indent: 20px;*/
+    /*line-height: 40px;*/
+    padding: 15px;
+}
+.sidebar-nav li a {
+    display: inline-block;						 /*-----------------------------------------*/
+    text-decoration: none;
+    color: #999999;
+}
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+    /*height: 65px;
+	line-height: 60px;
+*/    font-size: 26px;
+    
+}
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #4d4d4d;                           /*-----------------------------------------*/
+    background: none;
+}
+
+.mass_row { border-bottom: 1px dotted #999999; } /*-----------------------------------------*/
+.modal-title, .modal-body { color:#95acbc}									/*-----------------------------------------*/
+
+.minheight { min-height:680px; }
+
+
+
+.new_mes_bg { background:#FFFFFF; padding:10px; border-radius:4px; font-size:14px; font-weight:normal; width: 194px; margin-left: -11px;}    /*-----------------------------------------*/
+.new_mes_bg span { font-weight:normal !important; padding:0; margin:0; color:#597a96 !important;}    /*-----------------------------------------*/
+.new_mes_bg textarea { font-size:14px;} /*-----------------------------------------*/
+
+a.new_mes_send_btn { background:#428bca; padding:4px 8px 2px 8px; cursor:pointer; font-size:12px; color:#FFFFFF !important; border-radius:4px; }  /*-----------------------------------------*/
+a.new_mes_send_btn:hover { background:#3276b1 !important;  }  /*-----------------------------------------*/
+
+.MsgStatuscls {
+  font-size: 12px; color:green !important;   float: right; margin: 6px 6px 0px 0px !important; width:100px;
+}
+ .MsgStatuscls span {
+    /*float:right;*/
+    }
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-right: 200px;
+    }
+    #wrapper.toggled {
+        padding-right: 0;
+    }
+    #sidebar-wrapper {
+        width: 200px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-left: 0;
+    }
+	
+	 .sidebar-nav {
+    position: absolute;
+    top: 90px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+
+}
+ 
+ 
+ /* left side */
+ 
+ #menu-toggle1 {
+    float: left;
+}
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#wrapper.toggled1 {
+    padding-left: 200px;
+}
+#sidebar-wrapper1 {
+    z-index: 1000;
+    position: fixed;
+    left: 200px;
+    width: 0;
+    height: 100%;
+    margin-left: -200px;
+    overflow-x: hidden;
+    background: #275482;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#wrapper.toggled1 #sidebar-wrapper1 {
+    width: 200px;
+}
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+	left:0px;
+	top:75px;
+	color:#95acbc;
+}
+#wrapper.toggled1 #page-content-wrapper {
+    position: absolute;
+    margin-right: -200px;
+}
+/* Sidebar Styles */
+ .sidebar-nav1 {
+    position: absolute;
+    top: 35px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sidebar-nav1 li {
+    text-indent: 0;
+    line-height: 40px;
+    padding: 15px;
+}
+.sidebar-nav1 li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+.sidebar-nav1 li a:hover {
+    text-decoration: none;
+    color: #fff;
+    /*background: rgba(255, 255, 255, 0.2);*/
+}
+.sidebar-nav1 li a:active, .sidebar-nav1 li a:focus {
+    text-decoration: none;
+}
+.sidebar-nav1 > .sidebar-brand1 {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+.sidebar-nav1 > .sidebar-brand1 a {
+    color: #999999;
+}
+.sidebar-nav1 > .sidebar-brand1 a:hover {
+    color: #fff;
+    background: none;
+}
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 185px;
+    }
+    #wrapper.toggled1 {
+        padding-left: 0;
+    }
+    #sidebar-wrapper1 {
+        width: 200px;
+    }
+	
+	#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+	left:0;
+	top:65px
+}
+    #wrapper.toggled1 #sidebar-wrapper1 {
+        width: 0;
+    }
+    #page-content-wrapper {
+        padding: 30px 30px;
+        position: relative;
+
+    }
+    #wrapper.toggled1 #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+	 .sidebar-nav1 {
+    position: absolute;
+    top: 70px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+	
+}
+ 
+ 
+ @media(max-width:768px) {
+ .deal_top_bg { position:absolute; z-index:9999; padding:16px 0; float:left; width:100%; background:#12aaeb; color:#FFFFFF; text-align:center; font-size:24px; line-height:24px;  text-transform:uppercase;}
+ .deal_container { margin:0 auto; width:75%}
+ 
+ .side_right_btn { position:absolute; top:10px; right:4px; z-index:99999; display:block}
+.side_left_btn { position:absolute; top:10px; left:4px; z-index:99999; display:block}
+
+.minheight { min-height:inherit; }
+
+ }
+ 
+
+ 
+
+ /* New Classes for Popover : Messages*/
+ a.new_message {
+    background: #92a9b7;
+    border-radius: 4px;
+    color: #ffffff !important;
+    display: inline-block;
+    padding: 5px 10px 3px;
+}
+
+a.new_message:hover {
+    background: #7d909c !important;
+color: #ffffff !important ;
+}
+
+
+a.read_message {
+    border-radius: 4px;
+    color:#597a96 !important;
+    display: block !important;
+    padding: 5px 0px 3px;
+    font-size: 12px !important;
+    line-height: 14px;
+    cursor: pointer;
+    font-weight:normal;
+}
+
+a.read_message:hover {
+    color: #000 !important;
+}

@@ -1,0 +1,31 @@
+﻿ 
+    <style type="text/css">
+
+    </style>
+  
+
+    <script type="text/javascript"> 
+$(window).load(function(){
+$('[data-toggle="popover"]').popover({
+	html: true,
+	content: function() {
+        var content = $(this).data('content');
+        try { content = $(content).html() } catch(e) {/* Ignore */}
+        return content;
+	}
+});
+}); 
+
+    </script>
+
+ 
+    <h3>Using <em>data-content</em> attribute as text:</h3>
+    <a data-original-title="A Title" href="#" class="btn btn-primary btn-large" data-content="Text from data-content attribute!" data-title="Popover Title" data-toggle="popover">Click to toggle popover</a>
+    <hr>
+    <h3>Using <em>data-content</em> attribute as CSS selector:</h3>
+    <a data-original-title="A Title" href="#" class="btn btn-default btn-large" data-content="#countdown-popup" data-title="Popover Title" data-toggle="popover">Click to toggle popover</a>
+    <div class="hide" id="countdown-popup">Text from <code>#countdown-popup</code> element!</div>
+
+
+
+  

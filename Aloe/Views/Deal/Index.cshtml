@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Aloe.DB_Context.Deal>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="register_heading">
+        <h1>View All Deals</h1>
+    </div>
+    <div class="container tabs_col_wrapper">        
+        <div id="content">
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                <li class="active"><a onclick="DealDetail('inp');" href="#" data-toggle="tab">In Progress</a></li>
+                <li ><a onclick="DealDetail('complete');" href=" #" data-toggle="tab">Completed</a></li>
+                @*<li><a href="#yellow" data-toggle="tab">Archived</a></li>*@
+                <li><a onclick="DealDetail('can');" href="#" data-toggle="tab" id="CancelTabID">Cancelled </a></li>
+            </ul>
+            <br><br>
+            <div id="AllDeals">@Html.Partial("AllDeal",Model )</div>
+           
+        </div>
+    </div>
+</div>
+
+<table class="table hidden">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PropertyID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser2.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser3.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOITemplate.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser1.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser2.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser3.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOITemplate.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script type="text/javascript">
+    function DealDetail(status) {
+        
+        $("#AllDeals").load('@(Url.Action("DealList", "Deal", null, Request.Url.Scheme))?status=' + status)
+    
+        }   
+</script>

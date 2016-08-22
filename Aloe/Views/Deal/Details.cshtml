@@ -1,0 +1,91 @@
+﻿@model Aloe.DB_Context.Deal
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Deal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropertyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser1.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser2.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser2.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser3.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser3.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOITemplate.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOITemplate.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

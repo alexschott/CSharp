@@ -1,0 +1,183 @@
+﻿@model Aloe.Models.LOITemplatePointM
+
+@{
+    Layout = "~/Views/Deal/_DealLayout.cshtml";
+}
+
+
+<style>
+    a.edit {
+        background: url(../images/edit_ico.png) no-repeat top left;
+        display: block;
+        text-indent: -9999px; /* hides the link text */
+    }
+
+    a.delete {
+        background: url(../images/del_ico.png) no-repeat top left;
+        display: block;
+        text-indent: -9999px; /* hides the link text */
+    }
+</style>
+
+<script>
+    function GetDReview(elem,status) {
+        var DReview = $("#Dr" + elem.id).val();
+        var id = elem.id;
+        var EncTempID = $("#DealID").val();
+        //var TempID = $("#Tp" + elem.id).val();
+        $(elem).attr('href', $(elem).attr('href') + '?DReview=' + DReview + '&TempPid=' + id + '&TempID=' + EncTempID + '&DStatus=' + status);
+        //$(elem).attr('href', $(elem).attr('href') + '?DReview=' + DReview + '&id=' + id + '&TempID=' + EncTempID + '&DStatus=' + status);
+
+    }
+    function DelDReview(elem) {
+        var id = elem.id;
+        var TempID = $("#EncrptedTempID").val();
+        $(elem).attr('href', $(elem).attr('href') + '?id=' + id + '&TempID=' + TempID);
+    }
+    function Validate(Btn)
+    {
+        $("#BtnStatus").val(Btn);
+        return true;
+    }
+</script>
+
+
+
+@using (Html.BeginForm("SaveDealFinish", "Deal", new { DLiD = Request.Params["DealID"] }))
+{
+   @Html.AntiForgeryToken()
+    <div class="bread_crumb">
+        <ul>
+            <li>
+                <img src="~/images/check_ico1.jpg">
+                <div>STARTED</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>INITIAL TERMS</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>CLIENT REVIEW</div>
+            </li>
+            <li>
+                <img style="left:28px;" src="~/images/check_ico.jpg">
+                <div>AMENDMENTS</div>
+            </li>
+            <li>
+                @if (@ViewBag.Msg != "" && @ViewBag.Msg!=null)
+                { <img src="~/images/check_ico.jpg">}
+                else
+                {<img src="~/images/dote_ico2.jpg">}
+                <div>FINISH</div>
+            </li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+
+            <!-- content -->
+            <div class="">
+                <div class="deal_heading">
+                    <h1> @ViewBag.DealTopTitle.</h1>
+                    <h2>@ViewBag.DealSubTopTitle</h2>
+                </div>
+                <div><p style=" color:#29a329;"><b>@ViewBag.Msg</b></p></div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="right" valign="middle">
+                                    <div class="submit_checkbox">
+                                        <input type="hidden" id="BtnStatus" name="BtnStatus" value="SD" />
+                                        @*@Html.CheckBoxFor(m => m.CheckAll, new { @id = "CheckAll" })
+                                            @Html.LabelFor(m => m.CheckAll, "Accept All..", new { @class = "checkbox" })*@
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <table class="deal_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                                        @Html.HiddenFor(m => m.EncrptedTempID)
+                                        @Html.HiddenFor(m => m.CDealID)
+                                        @for (int i = 0; i < @Model.LoiTemPointsM.Count(); i++)
+                                        {
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].ID)
+                                            @*@Html.HiddenFor(m => @Model.LoiTemPointsM[i].TempId )*@
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].DealPoint)
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].InitialValue)
+
+                                            @Html.HiddenFor(m => @Model.LoiTemPointsM[i].DpStatus)
+
+                                            <tr>
+                                                <td align="left" valign="middle" width="25%"> @Html.DisplayFor(m => @Model.LoiTemPointsM[i].DealPoint)</td>
+                                                <td align="left" valign="middle" width="25%">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].InitialValue)</td>
+
+                                                @if (@Model.LoiTemPointsM[i].DpStatus == Aloe.Helper.Status.Accept)
+                                                {
+                                                    <td align="left" valign="middle" width="40%">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].DReview, new { id = ("Dr" + @Model.LoiTemPointsM[i].ID) })</td>
+                                                }
+                                                else if (@Model.LoiTemPointsM[i].DpStatus == Aloe.Helper.Status.Reject)
+                                                {
+                                                    <td align="left" valign="middle" width="40%">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].DReview, new { id = ("Dr" + @Model.LoiTemPointsM[i].ID) })</td>
+                                                }
+                                                else
+                                                {
+                                                    <td align="left" valign="middle" width="40%" style="position:relative;">@Html.DisplayFor(mbox => @Model.LoiTemPointsM[i].DReview, new { id = ("Dr" + @Model.LoiTemPointsM[i].ID) }) 
+                                                @if (Model.DpStatus != Aloe.Helper.Status.Finished) { 
+                                                <div class="needreview">need client review </div>}
+                                                </td>
+                                                }
+                                            </tr>
+                                        }
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    <div class="text-right" style="padding-top:30px">
+                                        @if(Model.DpStatus!=Aloe.Helper.Status.Finished && @Model.UserAllow)
+                                        { 
+                                        <button class="save_as_btn" type="submit" onclick="return Validate('finish');">CLOSE</button>
+                                        }
+                                        else if (Model.DpStatus == Aloe.Helper.Status.Finished)
+                                        {
+                                        @Html.ActionLink("EXPORT", "DownloadPDF", "Deal", new { DlID = @Model.CDealID.ToString() }, new {@Class="btn btn-primary"})
+                                        }
+                                        </div>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+        </div>
+    </div>
+
+    <script>
+        function Export() {
+           
+
+            $.ajax({
+                //type: 'GET',
+                //url: '/Deal/DownloadPDF',
+                //data: {  },
+                //cache: false,
+                //success: function (result) {
+
+                //}
+                url:'/Deal/DownloadPDF',
+            success: function(){
+             
+            }
+
+            });
+        }
+    </script>
+}
+<script src="~/Scripts/DealMessageLoader.js"></script>

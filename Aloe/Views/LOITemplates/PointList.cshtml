@@ -1,0 +1,33 @@
+﻿@model Aloe.Models.LOITemplateEntity
+<div class="loi_content" style="margin-top:-10px">
+
+    <table id="mytable" width="100%" border="0" cellspacing="0" cellpadding="0">
+        @foreach (var item in Model.LOITempPoints)
+        {
+            <tr>
+                @if (Model.Status == 0)
+                {
+                    <td>@Html.TextBoxFor(m => item.DealPoint, new { @class = "form-control ", @id = "U" + item.ID, @oninput = "BtnEnable(" + @item.ID + ")", onblur = "UpdateTemp(" + @item.ID + ")" })</td>
+                }
+                else
+                {
+                    <td>@Html.TextBoxFor(m => item.DealPoint, new { @class = "form-control", @id = "U" + item.ID, @oninput = "BtnEnable(" + @item.ID + ")", onblur = "UpdateTemp(" + @item.ID + ")", @disabled = "disabled" })</td>
+                }
+                 <td class="hidden"><span>@Html.DisplayFor(model => item.DealPoint, new { @class = "form-control" })</span></td>
+                @if (Model.Status == 0)
+                { 
+                <td width="5%">
+                    @Html.HiddenFor(m => item.ID)
+                    <a  id=@("BtnUpd"+item.ID) onclick="UpdateTemp(@item.ID);" class="btn disabled hidden" style="cursor:pointer;">  <img src="../../images/edit_ico.png">  </a>
+                    <a id=@("BtnDel"+item.ID) onclick="DeleteTemp(@item.ID);" style="cursor:pointer;"><img src="../../images/del_ico.png"></a>
+                </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<script>
+    function BtnEnable(ID) {
+        $("#BtnUpd" + ID).removeClass("disabled", 1000, "");
+    }
+</script>

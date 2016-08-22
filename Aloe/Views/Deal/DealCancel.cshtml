@@ -1,0 +1,77 @@
+﻿@model IList<Aloe.Models.DealM>
+
+ @{
+    Layout = "~/Views/Deal/_DealLayout.cshtml";
+}
+ 
+<!-- content -->
+<div class="">
+    <div class="deal_heading">
+        <h2>Cancel Deal</h2>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <div style="height:730px; overflow:auto">
+                <table class="deal_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th align="left" valign="middle" width="45%">Property</th>
+                        <th align="left" valign="middle" width="">Status</th>
+                        <th align="center" valign="middle" width="20%" style="text-align:center">Cancel</th>
+                    </tr>
+                    @foreach (var items in Model)
+                {
+                        <tr>
+                            <td align="left" valign="middle" width="">@Html.DisplayFor(dl => items.Property)</td>
+                            <td align="left" valign="middle" width="">@Html.Label(@Aloe.Helper.UI.DealStatus(items.Status).ToString())</td>
+                            <td align="center" valign="middle">
+                                <a href="#" onclick="openmodel(@items.ID,'@items.Property');">
+                                    <img src="~/Content/images/sm_error_gray.jpg">
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+                <!-- modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                            </div>
+                            <div class="modal-body">
+                                Reason<br>
+                                <textarea class="form-control" rows="3" id="TxtMessage"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                @*<button type="button" class="btn btn-primary">Cancel</button>*@
+                                <a href="/Deal/DealCancel" class="btn btn-primary" id="BtnCancelDeal" onclick="return CancelDeal(this);">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end modal -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openmodel(id,property) {
+        var idd = id;
+        $('#BtnCancelDeal').attr("href", $("#BtnCancelDeal").attr("href") + "?DlID=" + id);
+        $("#myModalLabel").text(property);
+        $('#myModal').modal('show');
+    }
+    function CancelDeal(elem)
+    {
+        var msg = $("#TxtMessage").val();
+        if(msg==null || msg=="") {alert('Proper reason required for cancelling a deal'); return  false;}
+        else { $(elem).attr("href", $(elem).attr("href") + "&Msg=" + msg);
+            return true;
+    }
+    }
+</script>
+
+<!-- end content -->
