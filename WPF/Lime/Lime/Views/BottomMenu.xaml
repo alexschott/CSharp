@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="Lime.Views.BottomMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="BottomAddImageBtnTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Ellipse Grid.Row="0" Stroke="#3F4A53" StrokeThickness="1" Stretch="Fill" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="#3F4A53">
+                            <SolidColorBrush.Transform>
+                                <ScaleTransform ScaleY="0.5"/>
+                            </SolidColorBrush.Transform>
+                        </SolidColorBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Image Source="..\Images\New Mail-WF.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                </Image>
+                <Viewbox Grid.Row="1">
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Foreground="White">add</TextBlock>
+                </Viewbox>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="BottomRemoveImageBtnTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Ellipse Grid.Row="0" Stroke="#3F4A53" StrokeThickness="1" Stretch="Fill" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="#3F4A53">
+                            <SolidColorBrush.Transform>
+                                <ScaleTransform ScaleY="0.5"/>
+                            </SolidColorBrush.Transform>
+                        </SolidColorBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Image Source="..\Images\Del Mail-WF.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                </Image>
+                <Viewbox Grid.Row="1">
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Foreground="White">remove</TextBlock>
+                </Viewbox>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="BottomConfImageBtnTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Ellipse Grid.Row="0" Stroke="#3F4A53" StrokeThickness="1" Stretch="Fill" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="#3F4A53">
+                            <SolidColorBrush.Transform>
+                                <ScaleTransform ScaleY="0.5"/>
+                            </SolidColorBrush.Transform>
+                        </SolidColorBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Image Source="..\Images\Settings02-WF.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                </Image>
+                <Viewbox Grid.Row="1">
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Foreground="White">configuration</TextBlock>
+                </Viewbox>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="BottomTestImageBtnTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Ellipse Grid.Row="0" Stroke="#3F4A53" StrokeThickness="1" Stretch="Fill" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="#3F4A53">
+                            <SolidColorBrush.Transform>
+                                <ScaleTransform ScaleY="0.5"/>
+                            </SolidColorBrush.Transform>
+                        </SolidColorBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Image Source="..\Images\Connector-01-WF.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Margin="10">
+                </Image>
+                <Viewbox Grid.Row="1">
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Foreground="White">test connection</TextBlock>
+                </Viewbox>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="BottomUtilImageBtnTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Ellipse Grid.Row="0" Stroke="#3F4A53" StrokeThickness="1" Stretch="Fill" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="#3F4A53">
+                            <SolidColorBrush.Transform>
+                                <ScaleTransform ScaleY="0.5"/>
+                            </SolidColorBrush.Transform>
+                        </SolidColorBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Image Source="..\Images\Tools-02.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                </Image>
+                <Viewbox Grid.Row="1">
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Foreground="White">utilities</TextBlock>
+                </Viewbox>
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="{x:Type Button}" x:Key="BottomAddImageBtn">
+            <Setter Property="Template" Value="{StaticResource BottomAddImageBtnTemplate}"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BottomRemoveImageBtn">
+            <Setter Property="Template" Value="{StaticResource BottomRemoveImageBtnTemplate}"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BottomConfImageBtn">
+            <Setter Property="Template" Value="{StaticResource BottomConfImageBtnTemplate}"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BottomTestImageBtn">
+            <Setter Property="Template" Value="{StaticResource BottomTestImageBtnTemplate}"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BottomUtilImageBtn">
+            <Setter Property="Template" Value="{StaticResource BottomUtilImageBtnTemplate}"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#323B43">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="33.33*"/>
+            <ColumnDefinition Width="33.34*"/>
+            <ColumnDefinition Width="33.33*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Style="{StaticResource BottomAddImageBtn}" Margin="13 5 13 5"></Button>
+            <Button Grid.Column="1" Style="{StaticResource BottomRemoveImageBtn}" Margin="13 5 13 5"></Button>
+            <Button Grid.Column="2" Style="{StaticResource BottomConfImageBtn}" Margin="13 5 13 5"></Button>
+            <Button Grid.Column="3" Style="{StaticResource BottomTestImageBtn}" Margin="13 5 13 5"></Button>
+            <Button Grid.Column="4" Click="utilBtn_Click" Style="{StaticResource BottomUtilImageBtn}" Margin="13 5 13 5"></Button>
+        </Grid>
+
+    </Grid>
+</UserControl>

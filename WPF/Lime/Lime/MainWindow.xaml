@@ -1,0 +1,36 @@
+﻿<Window x:Class="Lime.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local = "clr-namespace:Lime"
+        xmlns:views = "clr-namespace:Lime.Views"
+        mc:Ignorable = "d"
+        Title="Lime Software" MinHeight="768" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid>
+        <Grid.Resources>
+            <ImageBrush x:Key="Close" ImageSource="Images\Close-WF.png"/>
+            <ImageBrush x:Key="Minimize" ImageSource="Images\Minimize-WF.png"/>
+            <ImageBrush x:Key="Maximize" ImageSource="Images\Maximize-WF.png"/>
+        </Grid.Resources>
+        <ContentControl Name="contentMain">
+            <views:MainScreen></views:MainScreen>
+        </ContentControl>
+        <!--<Rectangle Height="30" Width="240" VerticalAlignment="top" HorizontalAlignment="Left" MouseDown="move_window">
+        </Rectangle>-->
+        <Rectangle Height="30" Margin="0 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Stretch" MouseDown="move_window">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Images\logo.png" Stretch="Uniform"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Margin="0,0,40,0" Height="30" Width="30" VerticalAlignment="Top" HorizontalAlignment="Right" MouseLeftButtonUp="MAX_RESTORE"
+                   MouseEnter="Activate_Title_Icons" MouseLeave="Deactivate_Title_Icons" MouseLeftButtonDown="Max_processing"
+                   Name="Max_btn" Fill="{StaticResource Maximize}"/>
+        <Rectangle Margin="0,0,80,0" Height="30" Width="30" VerticalAlignment="Top" HorizontalAlignment="Right" MouseLeftButtonUp="MINIMIZE"
+                   MouseEnter="Activate_Title_Icons" MouseLeave="Deactivate_Title_Icons" MouseLeftButtonDown="Min_processing"
+                   Name="Min_btn" Fill="{StaticResource Minimize}"/>
+        <Rectangle Margin="0,0,0,0" Height="30" Width="30" VerticalAlignment="Top" HorizontalAlignment="Right" MouseLeftButtonUp="EXIT"
+                   MouseEnter="Activate_Title_Icons" MouseLeave="Deactivate_Title_Icons" MouseLeftButtonDown="Close_processing"
+                   Name="Close_btn" Fill="{StaticResource Close}"/>
+    </Grid>
+</Window>

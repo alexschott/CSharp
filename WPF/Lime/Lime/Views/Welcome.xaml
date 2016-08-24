@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Lime.Views.Welcome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="ImageButtonTemplate">
+            <Grid>
+                <Image Source="..\Images\back.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButton">
+            <Setter Property="Template" Value="{StaticResource ImageButtonTemplate}"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <DrawingBrush Viewbox="0,0,100,100" ViewboxUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#434F5A">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="0,0,100,100"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <RadialGradientBrush GradientOrigin="0.5,0.01" Center="0.5,-0.2" RadiusX="100">
+                                <GradientStop Color="#323C46" Offset="1.0"/>
+                                <GradientStop Color="#323C46" Offset="0.0"/>
+                            </RadialGradientBrush>
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="-10,0,225,125">
+                                <RectangleGeometry.Transform>
+                                    <RotateTransform CenterX="10" CenterY="0"  Angle="28"/>
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <RadialGradientBrush GradientOrigin="0.5,0.01" Center="0.5,-0.2" RadiusX="100">
+                                <GradientStop Color="#262F38" Offset="1.0"/>
+                                <GradientStop Color="#262F38" Offset="0.0"/>
+                            </RadialGradientBrush>
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="100,-40,125,150">
+                                <RectangleGeometry.Transform>
+                                    <RotateTransform CenterX="60" CenterY="0"  Angle="60"/>
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </UserControl.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="1" HorizontalAlignment="Center">Welcome to Lime version 1.x.x</Label>
+            <Label Grid.Row="2" HorizontalAlignment="Center">For technical support please visit www.lime-software.com</Label>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Click="exportBtn_Click">Export Error logs</Button>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Click="BackBtn_Click" Style="{StaticResource ImageButton}">Back</Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

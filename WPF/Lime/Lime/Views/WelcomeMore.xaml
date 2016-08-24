@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="Lime.Views.WelcomeMore"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700">
+    <UserControl.Resources>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="ImageButtonTemplate">
+            <Grid>
+                <Image Source="..\Images\back.png" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButton">
+            <Setter Property="Template" Value="{StaticResource ImageButtonTemplate}"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <DrawingBrush Viewbox="0,0,100,100" ViewboxUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#434F5A">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="0,0,100,100"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <RadialGradientBrush GradientOrigin="0.5,0.01" Center="0.5,-0.2" RadiusX="100">
+                                <GradientStop Color="#323C46" Offset="1.0"/>
+                                <GradientStop Color="#323C46" Offset="0.0"/>
+                            </RadialGradientBrush>
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="-10,0,225,125">
+                                <RectangleGeometry.Transform>
+                                    <RotateTransform CenterX="10" CenterY="0"  Angle="28"/>
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <RadialGradientBrush GradientOrigin="0.5,0.01" Center="0.5,-0.2" RadiusX="100">
+                                <GradientStop Color="#262F38" Offset="1.0"/>
+                                <GradientStop Color="#262F38" Offset="0.0"/>
+                            </RadialGradientBrush>
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="100,-40,125,150">
+                                <RectangleGeometry.Transform>
+                                    <RotateTransform CenterX="60" CenterY="0"  Angle="60"/>
+                                </RectangleGeometry.Transform>
+                            </RectangleGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </UserControl.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="..\Images\welcome.png"></Image>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                <Label>Welcome to Lime App</Label>
+                <Label>The real-time motion graphics design software.</Label>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+                <Label>View the Quick Tours</Label>
+                <Label>Begin with an online Tutorial</Label>
+                <Label>Contact Us</Label>
+                <Label>Export logs</Label>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
